@@ -1,0 +1,386 @@
+<div class="footer">
+  <div class="wrap">
+      <div class="wrap_float">
+          <div class="footer_top">
+              <div class="left">
+                  <div class="col">
+                      <div class="_title m_title">Country</div>
+                      <ul>
+                        <% for(i=0;i<result[0].length;i++){ %>
+                          <li><a href="<%=result[0][i].name.replace(' ' , '-')%>?id=<%=result[0][i].id%>"><%=result[0][i].name%></a></li>
+                          <% } %>
+                        
+                      </ul>
+                  </div>
+                  <div class="col">
+                      <div class="_title m_title">Page</div>
+                      <ul>
+                          <li><a href="stories-full-width.html">Stories Full With</a></li>
+                          <li><a href="story.html">Stories Single</a></li>
+                          <li><a href="stories-right-sidebar.html">Stories Right Sidebar</a></li>
+                          <li><a href="stories-left-sidebar.html">Stories Left Sidebar</a></li>
+                          <li><a href="gallery.html">Gallery</a></li>
+                          <li><a href="gallery-single.html">Gallery Single</a></li>
+                          <li><a href="404.html">404 page</a></li>
+                          <li><a href="static-page-right-sidebar.html">Static Page Right Sidebar</a></li>
+                          <li><a href="static-page-left-sidebar.html">Static Page Left Sidebar</a></li>
+                          <li><a href="about-us.html">About Us</a></li>
+                      </ul>
+                  </div>
+                  <div class="col">
+                      <div class="_title m_title">Blog</div>
+                      <ul>
+                          <li><a href="blog-full-width.html">Blog Full With</a></li>
+                          <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                          <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
+                          <li><a href="blog-search-results.html">Search Result</a></li>
+                          <li><a href="blog-search-results-not-found.html">Search Nothing Found</a></li>
+                          <li><a href="blog-single-right-sidebar.html">Blog Single Right Sidebar</a></li>
+                          <li><a href="blog-single-left-sidebar.html">Blog Single Left Sidebar</a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="right">
+                  <div class="_title">Contacts</div>
+                  <div class="contacts_info">
+                      <div class="tel">
+                          <a href="tel:+19092020119">+ 1909 202 0119</a>
+                          <p>Round the clock support</p>
+                      </div>
+                      <div class="email">
+                          <a href="mailto:info@hellodigi.ru">info@hellodigi.ru</a>
+                          <p>For any questions</p>
+                      </div>
+                      <div class="address">
+                          Tamani arts building, Office no 907, Business bay dubai 
+                      </div>
+                  </div>
+                  <div class="socials social-links">
+                      <a href="#" class="link facebook"><span></span></a>
+                      <a href="#" class="link instagram"><span></span></a>
+                      <a href="#" class="link pinterest"><span></span></a>
+                      <a href="#" class="link twitter"><span></span></a>
+                      <a href="#" class="link youtube"><span></span></a>
+                  </div>
+              </div>
+          </div>
+          <div class="footer_bottom">
+              <div class="left">
+                  <a href="#">Privacy Policy</a>
+              </div>
+              <div class="right">
+                  Copyright © 2019 by Digistrict
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+</div>
+
+<div class="modal_search" id="modal_search">
+<div class="close"></div>
+
+<div class="search-tour">
+<form  method="get" action="/country">
+
+  <div class="wrap">
+      <div class="wrap_float">
+          <div class="search-form">
+
+              <div class="destination-col">
+                  <div class="label">Destination</div>
+                  <div class="select_wrap">
+                      <select name="search">
+                        <% for(i=0;i<result[0].length;i++){ %>
+                          <option value="<%=result[0][i].id%>"><%=result[0][i].name%></option>
+                          <% } %>
+                      </select>
+                  </div>
+              </div>
+              <div class="date-col">
+                  <div class="label">Check In</div>
+                  <div class="date_div">
+                      <input type="text" class="js_calendar desctop-input">
+                      <input type="date" class="mobile-input">
+                      <div class="day">21</div>
+                      <div class="date_div_right">
+                          <div class="month">December</div>
+                          <div class="year">2019</div>
+                      </div>
+                  </div>
+              </div>
+              <div class="date-col">
+                  <div class="label">Check Out</div>
+                  <div class="date_div">
+                      <input type="text" class="js_calendar desctop-input">
+                      <input type="date" class="mobile-input">
+                      <div class="day">21</div>
+                      <div class="date_div_right">
+                          <div class="month">December</div>
+                          <div class="year">2019</div>
+                      </div>
+                  </div>
+              </div>
+              <div class="num-col">
+                  <div class="label">Aduld</div>
+                  <div class="num_wrap">
+                      <div class="buttons">
+                          <button class="plus"></button>
+                          <button class="minus"></button>
+                      </div>
+                      <input type="number" class="val js_num" value="3" min="0" max="99">
+                  </div>
+              </div>
+              <div class="num-col last">
+                  <div class="label">Children</div>
+                  <div class="num_wrap">
+                      <div class="buttons">
+                          <button class="plus"></button>
+                          <button class="minus"></button>
+                      </div>
+                      <input type="number" class="val js_num" value="3" min="0" max="99">
+                  </div>
+              </div>
+              <button class="btn button">
+                  <span>Search</span>
+              </button>
+          </div>
+      </div>
+  </div>
+</form>
+</div>
+
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="popup login" id="login">
+<div class="scroll">
+  <div class="scroll_wrap">
+      <div class="popup-head">
+          <div class="title">Sign In</div>
+          <a class="link js-popup-open" data-href="#registration">Sign Up</a>
+
+      </div>
+      <div class="popup-body">
+          <div class="subtitle">
+              Use the e-mail and password that you specified when registering on the site
+          </div>
+          <div class="form">
+              <input type="text" class="input" placeholder="Login">
+              <input type="text" class="input" placeholder="Password">
+              <button class="submit button">Sign In</button>
+              <a href="#" class="link">Forgot password?</a>
+          </div>
+      </div>
+      <div class="popup-foot">
+          <p>Login via social networks</p>
+          <div class="social-links">
+              <a href="#" class="link facebook"><span></span></a>
+              <a href="#" class="link twitter"><span></span></a>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="close"></div>
+</div>
+
+
+<div class="popup registration" id="registration">
+<div class="scroll">
+  <div class="scroll_wrap">
+      <div class="popup-head">
+          <div class="title">Sign Up</div>
+          <a class="link js-popup-open" data-href="#login">Sign In</a>
+
+      </div>
+      <div class="popup-body">
+          <div class="subtitle">
+              Fill in the registration form and save your favorite tours, synchronize them on all devices
+          </div>
+          <div class="form">
+              <input type="text" class="input" placeholder="Username">
+              <input type="text" class="input" placeholder="Name">
+              <input type="text" class="input" placeholder="Surename">
+              <input type="email" class="input" placeholder="Email">
+              <input type="password" class="input" placeholder="Password">
+              <input type="password" class="input" placeholder="Password Repeat">
+              <button class="submit button js-submit">Registration</button>
+          </div>
+      </div>
+      <div class="popup-foot">
+          <p>Sign Up via social networks</p>
+          <div class="social-links">
+              <a href="#" class="link facebook"><span></span></a>
+              <a href="#" class="link twitter"><span></span></a>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="close"></div>
+</div>
+
+
+<div class="popup forgot-pass" id="recovery-pass">
+<div class="scroll">
+  <div class="scroll_wrap">
+      <div class="popup-head">
+          <div class="title">Forgot password?</div>
+      </div>
+      <div class="popup-body">
+          <div class="subtitle">
+              Use the e-mail and password that you specified when registering on the site
+          </div>
+          <div class="form">
+              <input type="email" class="input" placeholder="Email">
+              <button class="submit button js-submit">Reset password</button>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="close"></div>
+</div>
+
+
+<div class="popup profile-setting" id="profile-setting">
+<div class="scroll">
+  <div class="scroll_wrap">
+      <div class="select-userpic">
+          <div class="userpic">V</div>
+          <div class="select">
+              <input type="file" id="profile-pic">
+              <label for="profile-pic">Select photo</label>
+          </div>
+      </div>
+      <div class="popup-head">
+          <div class="title">Setting</div>
+      </div>
+      <div class="popup-body">
+          <div class="form">
+              <input type="text" class="input" placeholder="Username" value="Victor777">
+              <input type="text" class="input" placeholder="Name" value="Victor">
+              <input type="text" class="input" placeholder="Surename" value="Shibut">
+              <input type="email" class="input" placeholder="Email" value="test@test.com">
+              <div class="label">Change password</div>
+              <input type="password" class="input" placeholder="Current password">
+              <input type="password" class="input" placeholder="Enter new password">
+              <input type="password" class="input" placeholder="New password repeat">
+              <div class="label">Authorization through social networks</div>
+              <div class="social-links">
+                  <a href="#" class="link facebook active"><span></span></a>
+                  <a href="#" class="link twitter"><span></span></a>
+              </div>
+              <button class="submit button js-submit">Save Setting</button>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="close"></div>
+</div>
+
+
+<div class="popup contact-us" id="contact-us">
+<div class="scroll">
+  <div class="scroll_wrap">
+      <div class="popup-head">
+          <div class="title">Contact Us</div>
+      </div>
+      <div class="popup-body">
+          <div class="subtitle">
+              But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain
+          </div>
+          <div class="form">
+              <input type="text" class="input" placeholder="Name">
+              <input type="email" class="input" placeholder="Email">
+              <input type="text" class="input" placeholder="Phone">
+              <textarea class="textarea" placeholder="Your Massage"></textarea>
+              <button class="submit button js-submit">Send Massage</button>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="close"></div>
+</div>
+
+<div class="popup book-now-popup" id="book-now">
+<div class="scroll">
+  <div class="scroll_wrap">
+      <div class="popup-head">
+          <div class="title">Book Now</div>
+      </div>
+      <div class="popup-body">
+          <div class="tour-title">
+              <div class="img">
+                  <img src="/star_atlantic/img/demo-bg.jpg" alt="">
+              </div>
+              <div class="tour-name">
+                  Tour to the Arctic is an exotic journey on the verge of extreme
+              </div>
+          </div>
+          <div class="tour-info">
+              <div class="col">
+                  <div class="label">Check In</div>
+                  <div class="date">
+                      <div class="day">09</div>
+                      <div class="month">May</div>
+                      <div class="year">2019</div>
+                  </div>
+                  <div class="label">Aduld: <span>3</span></div>
+              </div>
+              <div class="col">
+                  <div class="label">Check Out</div>
+                  <div class="date">
+                      <div class="day">09</div>
+                      <div class="month">May</div>
+                      <div class="year">2019</div>
+                  </div>
+                  <div class="label">Children: <span>0</span></div>
+              </div>
+          </div>
+          <div class="form">
+              <input type="text" class="input" placeholder="Your First Name">
+              <input type="text" class="input" placeholder="Your Last Name">
+              <input type="email" class="input" placeholder="Your Email">
+              <input type="tel" class="input" placeholder="Your Number Phone">
+              <textarea class="textarea" placeholder="Where are your address?"></textarea>
+              <textarea class="textarea" placeholder="Note:"></textarea>
+              <button class="submit button js-submit">Book Now | <b>$356</b></button>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="close"></div>
+</div>
+
+<div class="popup success-popup" id="contact-us-success">
+<div class="scroll">
+  <div class="scroll_wrap">
+      <div class="popup-head">
+          <div class="title">Success</div>
+      </div>
+      <div class="popup-body">
+          <div class="subtitle">
+              Your message was successfully sent. We will contact you shortly
+          </div>
+      </div>
+  </div>
+</div>
+<div class="close"></div>
+</div>
+
+<script src="/star_atlantic/js/jquery.min.js"></script>
+<script src="/star_atlantic/js/jquery-ui.min.js"></script>
+<script src="/star_atlantic/js/lightgallery.js"></script>
+<script src="/star_atlantic/js/jquery.mousewheel.min.js"></script>
+<script src="/star_atlantic/js/slick.min.js"></script>
+<script src="/star_atlantic/js/hammer.js"></script>
+<script src="/star_atlantic/js/scripts.js"></script>
+
+
+
+
+
+</body>
+
+</html>

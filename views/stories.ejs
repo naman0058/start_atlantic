@@ -1,0 +1,56 @@
+
+    <%- include ('./header.ejs') %>
+
+
+        <div class="breadcrumbs">
+            <div class="wrap">
+                <div class="wrap_float">
+                    <a href="#">Home</a>
+                    <span class="separator">/</span>
+                    <a href="#">Stories</a>
+                </div>
+            </div>
+        </div>
+        <div class="page stories-list-page full-width">
+            <div class="wrap">
+                <div class="wrap_float">
+                    <div class="page_head">
+                        <h1 class="title">
+                            Interesting Stories
+                        </h1>
+                      
+                                       </div>
+                    <div class="page_body">
+                        <div class="stories_list">
+                          
+                            <% for(i=0;i<result[0].length;i++){ %>
+                          
+                          
+                            <a href="/single-story?id=<%=result[0][i].id%>" class="story_item" style="background-image: url(/images/<%=result[0][i].image%>)">
+                                <div class="item_wrap">
+                                    <div class="_content">
+                                        <div class="flag_wrap">
+                                            <div class="flag">
+                                                <img src="/images/<%=result[0][i].icon%>" alt="">
+                                            </div>
+                                        </div>
+                                        <h3 class="country"><%=result[0][i].name%></h3>
+                                        <p class="text">
+                                           
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="shadow js-shadow"></div>
+                            </a>
+
+                          <% } %>
+                           
+
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        <%- include ('./footer.ejs') %>

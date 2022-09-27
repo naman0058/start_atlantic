@@ -1,0 +1,54 @@
+
+    <%- include ('./header.ejs') %>
+
+
+    <div class="breadcrumbs">
+        <div class="wrap">
+            <div class="wrap_float">
+                <a href="#">Home</a>
+                <span class="separator">/</span>
+                <a href="#">Destination</a>
+            </div>
+        </div>
+    </div>
+    <div class="page stories-list-page full-width">
+        <div class="wrap">
+            <div class="wrap_float">
+                <div class="page_head">
+                    <h1 class="title">
+                        All Destination
+                    </h1>
+                  
+                
+                </div>
+                <div class="page_body">
+                    <div class="stories_list">
+                      
+                        <% for(i=0;i<result[0].length;i++){ %>
+                      
+                      
+                          <a href="/country/<%=result[0][i].name.replace(/[ ,]+/g, "-")%>?id=<%=result[0][i].id%>" class="destinations_item" style="background-image: url(/images/<%=result[0][i].image%>)">
+                            <div class="sq_parent">
+                                <div class="sq_wrap">
+                                    <div class="sq_content">
+                                        <div class="_content">
+                                            <h3 class="_title"><%=result[0][i].name%></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shadow js-shadow"></div>
+                        </a>
+
+                      <% } %>
+                       
+
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <%- include ('./footer.ejs') %>

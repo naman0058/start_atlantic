@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Star Atlantic</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Prata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/star_atlantic/css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/star_atlantic/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/star_atlantic/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/star_atlantic/img/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/star_atlantic/img/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/star_atlantic/img/favicons/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" href="/star_atlantic/img/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" sizes="16x16" href="/star_atlantic/img/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#151515">
+    <meta name="theme-color" content="#151515">
+</head>
+
+<body>
+    <div class="container">
+        <div class="top_panel <%=inversion%>">
+            <div class="wrap">
+                
+                    
+                    <div class="left">
+                        <div class="search_btn"></div>
+                        <a href="/" class="logo">
+                            <img src="/star_atlantic/img/logo.png" alt="">
+                        </a>
+                    </div>
+                    <div class="menu_wrap" id="menu_wrap">
+                        <div class="scroll">
+                            <div class="center">
+                                <div class="menu">
+                                    <ul>
+                                        <li><a href="/"><span>Home</span></a></li>
+                                        <li class="dropdown_li">
+                                            <a href="#" class="active"><span>Country</span></a>
+                                            <ul class="dropdown_ul">
+                                  <% for(i=0;i<result[0].length;i++){ %>
+                                               
+                                              <li><a href="/country/<%=result[0][i].name.replace(' ' , '-')%>?id=<%=result[0][i].id%>"><%=result[0][i].name%></a></li>
+                                               <% } %>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/stories"><span>Stories</span></a></li>
+                                        <!-- <li><a href="/show-gallery"><span>Gallery</span></a></li> -->
+                                        <li><a href="/about-us"><span>About Us</span></a></li>
+                                        <li><a href="/all-blogs"><span>Blog</span></a></li>
+                                        <li><a href="/contact-us"><span>Contacts</span></a></li>
+                                    </ul>
+                                    <div class="mobile_content">
+                                        <div class="currency_mob">
+                                            <select>
+                                                
+                                                
+                                            </select>
+                                            <p>
+                                                Chosen currency
+                                            </p>
+                                        </div>
+                                        <div class="tel">
+                                            <a href="tel:+0034411345777">+ 00 344 113 457 77</a>
+                                            <p>Round the clock support</p>
+                                        </div>
+                                        <div class="social">
+                                            <a href="#" class="link facebook"><span></span></a>
+                                            <a href="#" class="link instagram"><span></span></a>
+                                            <a href="#" class="link pinterest"><span></span></a>
+                                            <a href="#" class="link twitter"><span></span></a>
+                                            <a href="#" class="link youtube"><span></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="close" id="menu-close">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="tel"><a href="tel:+19092020119"><span>+ 1909 202 0119</span></a></div>
+                                <!-- <a class="favorites-count" title="Favourites" href="favourites.html">
+                                    <div class="_counter">14</div>
+                                    <div class="_text">Favourites</div>
+                                </a> -->
+                            </div>
+                            <!-- <div class="user" id="userblock">
+                                <div class="userlink" id="userlink"></div>
+                                <div class="usermenu" id="usermenu">
+                                    <ul>
+                                        <li><a href="#" class="js-popup-open" data-href="#login">Login</a></li>
+                                        <li><a href="#" class="js-popup-open" data-href="#registration">Registration</a></li>
+                                        <li><a href="#" class="js-popup-open" data-href="#recovery-pass">Forgot password?</a></li>
+                                        <li><a href="#" class="js-popup-open" data-href="#profile-setting">Setting</a></li>
+                                    </ul>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="mobile_btn" id="mobile_btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>

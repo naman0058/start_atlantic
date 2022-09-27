@@ -1,0 +1,81 @@
+<%- include ('./header.ejs') %>
+
+        <div class="breadcrumbs">
+            <div class="wrap">
+                <div class="wrap_float">
+                    <a href="#">Home</a>
+                    <span class="separator">/</span>
+                    <a href="#">Blogs</a>
+                </div>
+            </div>
+        </div>
+        <div class="page blog-list-page full-width">
+            <div class="wrap">
+                <div class="wrap_float">
+                    <div class="page_head">
+                        <h1 class="title">
+                            All Blogs
+                        </h1>
+                       
+                        <div class="filters">
+                            <div class="select_wrap">
+                                
+                                <select>
+                                    <% for(i=0;i<result[2].length;i++){%>
+                                    <option value=" <%=result[2][i].id%>">
+                                      <%=result[2][i].name%>
+                                    </option>
+                                   <% } %>
+                                </select>
+                            </div>
+                            <div class="search_wrap">
+                                <input class="input" placeholder="Search" type="text">
+                                <button class="submit"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page_body">
+                        <div class="blog-list">
+                           
+
+                            <% for(i=0;i<result[1].length;i++) { %>
+                                <a href="#" class="blog_item">
+                                    <div class="blog_item_top" style="background-image: url(/images/<%=result[1][i].image%>);">
+                                        <div class="sq_parent">
+                                            <div class="sq_wrap">
+                                                <div class="sq_content">
+                                                    <div class="tags">
+                                                        <div class="tag red"><%=result[1][i].categoryname%></div>
+                                                    </div>
+                                                    <h3 class="_title">
+                                                        <%=result[1][i].name%>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="shadow js-shadow"></div>
+                                    </div>
+                                    <div class="blog_item_bottom">
+                                        
+                                        <p class="text" style="   overflow: hidden;
+                                        display: -webkit-box;
+                                        -webkit-line-clamp: 2;
+                                        -webkit-box-orient: vertical;">
+                                            <%=result[1][i].project_description%>
+                                        </p>
+                                    </div>
+                                </a>
+        
+                                <% } %>
+
+
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+<%- include ('./footer.ejs') %>
