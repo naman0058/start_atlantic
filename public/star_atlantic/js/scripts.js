@@ -453,9 +453,10 @@ $(document).ready(function(){
     $(".js_calendar").datepicker({
       dateFormat: "d MM yy",
         dayNamesMin: [ "S", "M", "T", "W", "T", "F", "S" ],
-        monthNames: [ "January", "February", "March", "April", "May", "June", "Jule", "August", "September", "Oktober", "November", "December" ],
+        monthNames: [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
         setDate: "today",
-        firstDay: 0
+        firstDay: 0,
+        minDate: '-0D',
     });
     
     $(".js_calendar").datepicker().datepicker("setDate", new Date());
@@ -486,6 +487,9 @@ $(document).ready(function(){
         var day = date[0];
         var month = date[1];
         var year = date[2];
+
+        
+        
         
         var thisDayDiv = thisParent.children(".day");
         var thisMonthDiv = thisParent.children(".date_div_right").find(".month");
@@ -520,7 +524,7 @@ $(document).ready(function(){
     });
     
     var months = [
-                "January", "February", "March", "April", "May", "June", "Jule", "August", "September", "Oktober", "November", "December"
+                "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
             ]
     
     if (screen.width <= 1040) {

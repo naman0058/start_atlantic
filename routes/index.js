@@ -403,13 +403,23 @@ router.get('/contact-us', function(req, res, next) {
 
 
 router.post('/thankyou', function(req, res, next) {
-  var query = `select * from country;`
-  var query1 = `select * from country;`
-  pool.query(query+query1,(err,result)=>{
+
+  let body = req.body;
+  console.log(req.body)
+  pool.query(`insert into booking set ?`,body,(err,result)=>{
     if(err) throw err;
-    else res.render('thankyou',{result,inversion:'inversion'})
+    else {
+      var query = `select * from country;`
+      var query1 = `select * from country;`
+      pool.query(query+query1,(err,result)=>{
+        if(err) throw err;
+        else res.render('thankyou',{result,inversion:'inversion'})
+      })
+    
+    }
   })
 
+  
 });
 
 // not editable
@@ -916,6 +926,9 @@ res.json({
 })
 	
 })
+
+
+
 
 
 

@@ -303,7 +303,7 @@
                         </div>
                         <div class="right">
                             <div class="input_wrap select_wrap">
-                                <select>
+                                <select id="subscribecity">
                                   <% for(i=0;i<result[0].length;i++){ %> 
                                   <option value="<%=result[0][i].name%>"><%=result[0][i].name%></option>
                                     <% } %>
@@ -340,9 +340,21 @@
 
 <script>
     $('.subscribe').click(function(){
+        let city = $('#subscribecity').val()
         if($('#email').val() == [] || $('#email').val() == '' || $('#email').val() == null || $('#email').val() == "null" ) alert('Enter Email')
         else{
-            alert('Thanks to subscribe us')
+
+            let email = $('#email').val()
+            $.post('/subscribe/insert',{email,city},data=>{
+                //  alert(data)
+                if(data.status == 500 || data.status == '500') alert('Already Subscribed')
+                else{
+                    alert('Thanks to subscribe us')
+
+                }
+
+
+            })
         }
     })
 </script>

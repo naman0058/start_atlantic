@@ -119,7 +119,7 @@
                         <div class="wrap_float">
                             <a href="#">Home</a>
                             <span class="separator">/</span>
-                            <a href="#"><%=name.replace('-' , ' ')%></a>
+                            <a href="#"><%=name.replace(/[ ,]+/g, "-")%></a>
                         </div>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                             <div class="top-info">
                                 <p class="country"><%=result[1][0].statename%></p>
                                 <h1 class="tour_title">
-                                    <%=name.replace('-' , ' ')%>
+                                    <%=name.replace(/[ ,]+/g, "-")%>
                                 </h1>
                                 <div class="controls">
                                     <div class="add_bookmark fav-button">
@@ -160,45 +160,48 @@
                                             <div class="date-col">
                                                 <div class="label">Check In</div>
                                                 <div class="date_div">
-                                                    <input type="text" class="js_calendar desctop-input">
+                                                    <input type="text" class="js_calendar desctop-input datechange">
                                                     <input type="date" class="mobile-input">
                                                     <div class="day">21</div>
                                                     <div class="date_div_right">
-                                                        <div class="month">December</div>
-                                                        <div class="year">2019</div>
+                                                        <div class="month" style="color: white;">December</div>
+                                                        <div class="year" style="color: white;">2019</div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="date-col">
                                                 <div class="label">Check Out</div>
                                                 <div class="date_div">
-                                                    <input type="text" class="js_calendar desctop-input">
-                                                    <input type="date" class="mobile-input">
-                                                    <div class="day">21</div>
+                                                    <!-- <input type="text" class="js_calendar desctop-input"> -->
+                                                    <!-- <input type="date" class="mobile-input"> -->
+                                                    <div class="newday" style=" width: auto;
+                                                    font-size: 59px;
+                                                    font-family: 'Prata', serif;
+                                                    color: #fff;">21</div>
                                                     <div class="date_div_right">
-                                                        <div class="month">December</div>
-                                                        <div class="year">2019</div>
+                                                        <div class="newmonth" style="color: white;">December</div>
+                                                        <div class="newyear" style="color: white;">2019</div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="num-col">
-                                                <div class="label">Aduld</div>
+                                                <div class="label">Adult</div>
                                                 <div class="num_wrap">
                                                     <div class="buttons">
-                                                        <button class="plus"></button>
-                                                        <button class="minus"></button>
+                                                        <button class="plus adultplus"></button>
+                                                        <button class="minus adultminus"></button>
                                                     </div>
-                                                    <input type="number" class="val js_num" value="3" min="0" max="99">
+                                                    <input type="number" class="val js_num adult" value="3" min="0" max="99">
                                                 </div>
                                             </div>
                                             <div class="num-col last">
                                                 <div class="label">Children</div>
                                                 <div class="num_wrap">
                                                     <div class="buttons">
-                                                        <button class="plus"></button>
-                                                        <button class="minus"></button>
+                                                        <button class="plus childrenplus"></button>
+                                                        <button class="minus childrenminus"></button>
                                                     </div>
-                                                    <input type="number" class="val js_num" value="3" min="0" max="99">
+                                                    <input type="number" class="val js_num children" value="3" min="0" max="99">
                                                 </div>
                                             </div>
                                         </div>
@@ -207,6 +210,7 @@
                                 <div class="bottom-info-right">
                                     <div class="info">
                                         <div class="days"><%=result[1][0].tour_days%> Days</div>
+                                        <input type="hidden" id="tourdate" value="<%=result[1][0].tour_days%>">
                                     </div>
                                     <button class="btn button js-popup-open" data-href="#book-now">Enquiry now</button>
                                     <div class="rating">
@@ -527,7 +531,7 @@
                                 <div class="_title m_title">Country</div>
                                 <ul>
                                   <% for(i=0;i<result[0].length;i++){ %>
-                                    <li><a href="<%=result[0][i].name.replace(' ' , '-')%>?id=<%=result[0][i].id%>"><%=result[0][i].name%></a></li>
+                                    <li><a href="<%=result[0][i].name.replace(/[ ,]+/g, "-")%>?id=<%=result[0][i].id%>"><%=result[0][i].name%></a></li>
                                     <% } %>
                                   
                                 </ul>
@@ -843,25 +847,37 @@
                         <div class="col">
                             <div class="label">Check In</div>
                             <div class="date">
-                                <div class="day">09</div>
-                                <div class="month">May</div>
-                                <div class="year">2019</div>
+                                <div class="finalday"  style=" width: auto;
+                                font-size: 42px;
+                                margin: 0px;
+                                font-family: 'Prata', serif;
+                                color: black;"></div>
+                                <div class="finalmonth">May</div>
+                                <div class="finalyear">2019</div>
                             </div>
-                            <div class="label">Aduld: <span>3</span></div>
+                            <div class="label">Aduld: <span class="finaladult"></span></div>
                         </div>
                         <div class="col">
                             <div class="label">Check Out</div>
                             <div class="date">
-                                <div class="day">09</div>
-                                <div class="month">May</div>
-                                <div class="year">2019</div>
+                                <div class="newday" style=" width: auto;
+                                font-size: 42px;
+                                font-family: 'Prata', serif;
+                                color: black;">09</div>
+                                
+                                <div class="newmonth">May</div>
+                                <div class="newyear">2019</div>
                             </div>
-                            <div class="label">Children: <span>0</span></div>
+                            <div class="label">Children: <span class="finalchildren"></span></div>
                         </div>
                     </div>
                     <div class="form">
-                        <input type="hidden" name="check_in_date">
-                        <input type="hidden" name="check_out_date">
+                        <input type="hidden" name="check_in_date" class="check_in_date" value="">
+                        <input type="hidden" name="check_out_date" class="check_out_date" value="">
+
+                        <input type="hidden" name="finalchildren1" class="finalchildren1">
+                        <input type="hidden" name="finaladult1" class="finaladult1">
+
 
                         <input type="text" class="input" name="first_name" required placeholder="Your First Name">
                         <input type="text" class="input" name="last_name" required placeholder="Your Last Name">
@@ -903,7 +919,290 @@
           <script src="/star_atlantic/js/scripts.js"></script>
           
           
-          
+          <script>
+
+$( document ).ready(function() {
+
+
+    let tourdate = $('#tourdate').val()
+    let finaladult = $('.adult').val()
+     $('.finaladult1').val(finaladult)
+    let finalchildren = $('.children').val()
+    $('.finalchildren1').val(finalchildren)
+
+
+
+
+    // alert(finaladult)
+   
+    $('.finaladult').html(finaladult)
+    $('.finalchildren').html(finalchildren)
+
+
+
+            var today = new Date();
+        today.setDate(today.getDate() + (tourdate-(+1)));
+        
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        
+        today = yyyy + '-' + mm + '-' + dd;
+
+
+        $('.check_out_date').val(today)
+    
+    let day = today.slice(8, 10);
+    let month = today.slice(5,7);
+    let year = today.slice(0,4)
+
+    const monthNames = ["","January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+let newmonth = monthNames[month];
+let newday = day;
+let newyear = year;   
+
+
+
+        $('.newday').html(newday)
+        $('.newmonth').html(newmonth)
+        $('.newyear').html(newyear)
+
+
+       
+        
+
+
+        
+var today1 = new Date();
+       
+        
+       var dd1 = String(today1.getDate()).padStart(2, '0');
+       var mm1 = String(today1.getMonth() + 1).padStart(2, '0'); //January is 0!
+       var yyyy1 = today1.getFullYear();
+       
+       today1 = yyyy1 + '-' + mm1 + '-' + dd1;
+
+       $('.check_in_date').val(today1)
+   
+   let startday = today1.slice(8, 10);
+   let startmonth = today1.slice(5,7);
+   let startyear = today1.slice(0,4)
+
+   const monthNames1 = ["","January", "February", "March", "April", "May", "June",
+ "July", "August", "September", "October", "November", "December"
+];
+
+let newmonth1 = monthNames1[startmonth];
+let newday1 = startday;
+let newyear1 = startyear;   
+
+
+
+       $('.finalday').html(newday1)
+       $('.finalmonth').html(newmonth1)
+       $('.finalyear').html(newyear1)
+
+
+
+})
+
+
+$('.childrenplus').click(function(){
+    let finalchildren = $('.children').val()
+    $('.finalchildren').html((+finalchildren)+1)
+    $('.finalchildren1').val((+finalchildren)+1)
+
+
+    
+
+})
+
+
+$('.childrenminus').click(function(){
+    let finalchildren = $('.children').val()
+    $('.finalchildren').html((+finalchildren)-1)
+    $('.finalchildren1').val((+finalchildren)-1)
+
+
+
+})
+
+
+
+
+$('.adultplus').click(function(){
+    let finaladult = $('.adult').val()
+
+    $('.finaladult').html((+finaladult)+1)
+
+    $('.finaladult1').val((+finaladult)+1)
+
+
+})
+
+
+$('.adultminus').click(function(){
+    let finaladult = $('.adult').val()
+
+    $('.finaladult').html((+finaladult)-1)
+    $('.finaladult1').val((+finaladult)-1)
+
+
+})
+
+
+
+
+
+$('.datechange').change(function(){
+    
+    const monthsLong = {
+  January: '01',
+  February: '02',
+  March: '03',
+  April: '04',
+  May: '05',
+  June: '06',
+  July: '07',
+  August: '08',
+  September: '09',
+  October: '10',
+  November: '11',
+  December: '12',
+};
+
+
+
+const monthsLong1 = {
+  01: 'January',
+  02: 'February',
+  03: 'March',
+  04: 'April',
+  05: 'May',
+  06: 'June',
+  07: 'July',
+  08: 'August',
+  09: 'September',
+  10: 'October',
+  11: 'November',
+  12: 'December',
+};
+
+
+
+const DaysLong = {
+  1: '01',
+  2: '02',
+  3: '03',
+  4: '04',
+  5: '05',
+  6: '06',
+  7: '07',
+  8: '08',
+  9: '09',
+  10: '10',
+  11: '11',
+  12: '12',
+};
+    
+    // let day = $('.datechange').val().slice(0,2)
+    // let month  = $('.datechange').val().slice(0,2)
+
+    // replace(/[ ,]+/g, "-")
+
+    let date = $('.datechange').val().replace(/[ ' '  ]+/g, "")
+    let date1 = $('.datechange').val().replace(/[ ' '  ]+/g, "-")
+
+    let day = date.slice(0,2)
+    // let month = date.slice(2,);
+    // alert(month)
+    var withNoDigits = date.replace(/[0-9]/g, '');
+    let month = monthsLong[withNoDigits]
+    let ekmonth = monthsLong1[withNoDigits]
+
+    var numb = $('.datechange').val().replace( /\D+/g, '');
+    
+    if(numb.length==5){
+      day = DaysLong[numb.slice(0,1)]
+      year = numb.slice(1,5)
+    }
+    else{
+        day = numb.slice(0,2)
+      year = numb.slice(2,6)
+    }
+
+    var newdate = year + '-' + month + '-' + day;
+
+    $('.check_in_date').val(newdate)
+
+
+
+    $('.finalday').html(day)
+        $('.finalmonth').html(ekmonth)
+        $('.finalyear').html(year)
+
+
+  
+
+    let tourdate = $('#tourdate').val()
+
+    var theDate = new Date(year, month-1, day);
+var myNewDate = new Date(theDate);
+myNewDate.setDate(myNewDate.getDate() + (+tourdate)-1);
+
+// alert(String(myNewDate.getMonth() + 1).padStart(2, '0'))
+
+        
+        var dd = String(myNewDate.getDate()).padStart(2, '0');
+        var mm = String(myNewDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = myNewDate.getFullYear();
+        
+        today = yyyy + '-' + mm + '-' + dd;
+
+        $('.check_out_date').val(today)
+
+        // alert(today)
+    
+    let day1 = today.slice(8, 10);
+    let month1 = today.slice(5,7);
+    let year1 = today.slice(0,4)
+
+
+
+
+
+
+
+    // alert(month1.slice(6,7))
+
+    const monthNames = ["","January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+// alert(month1.length)
+// alert(monthsLong1[(+month1)])
+
+let newmonth = monthsLong1[(+month1)];
+let newday = day1;
+let newyear = year1;   
+
+
+
+        $('.newday').html(newday)
+        $('.newmonth').html(newmonth)
+        $('.newyear').html(newyear)
+
+
+
+
+
+})
+
+    </script>
+    
           
           
           </body>

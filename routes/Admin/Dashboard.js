@@ -14,7 +14,8 @@ var table = 'admin'
 router.get('/',(req,res)=>{
     if(req.session.adminid){
       
-res.render('Admin/Dashboard',{msg : ''})
+// res.render('Admin/Dashboard',{msg : ''})
+res.redirect('/admin/dashboard/user/country')
 
 
    }
