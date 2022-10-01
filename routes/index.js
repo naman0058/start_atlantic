@@ -158,8 +158,10 @@ router.get('/tours/:name',(req,res)=>{
   var query3 = `select * from images where tourid = '${req.query.id}';`
   var query4 = `select * from days where tourid = '${req.query.id}';`
   var query5 = `select * from story order by RAND() limit 4;`
+  var query6 = `select * from instagram_stories order by id desc limit 5;`
 
-  pool.query(query+query1+query2+query3+query4+query5 ,(err,result)=>{
+
+  pool.query(query+query1+query2+query3+query4+query5+query6 ,(err,result)=>{
     if(err) throw err;
     else res.render('tour_view',{result,name:req.params.name,id:req.query.id,inversion:'inversion'})
   })

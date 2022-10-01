@@ -474,51 +474,21 @@
         </div>
         <div class="instagram_posts">
             <div class="posts">
-                <a class="post">
+             
+             
+             <% for(i=0;i<result[6].length;i++){%>
+              <a class="post">
                     <div class="sq_parent">
                         <div class="sq_wrap">
                             <div class="sq_content">
-                                <img src="img/demo-bg.jpg" alt="">
+                                <img src="/images/<%=result[6][i].image%>" alt="">
                             </div>
                         </div>
                     </div>
                 </a>
-                <a class="post">
-                    <div class="sq_parent">
-                        <div class="sq_wrap">
-                            <div class="sq_content">
-                                <img src="img/demo-bg.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a class="post">
-                    <div class="sq_parent">
-                        <div class="sq_wrap">
-                            <div class="sq_content">
-                                <img src="img/demo-bg.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a class="post">
-                    <div class="sq_parent">
-                        <div class="sq_wrap">
-                            <div class="sq_content">
-                                <img src="img/demo-bg.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a class="post">
-                    <div class="sq_parent">
-                        <div class="sq_wrap">
-                            <div class="sq_content">
-                                <img src="img/demo-bg.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </a>
+
+                <% } %>
+            
             </div>
         </div>
     
@@ -880,6 +850,10 @@
 
                         <input type="hidden" name="state_name" class="" value="<%=result[1][0].statename%>">
                         <input type="hidden" name="tour_name" class="" value="<%=result[1][0].name%>">
+                        <input type="text" name="country_id" class="" value="<%=result[1][0].countryid%>">
+                        <input type="text" name="tour_id" class="" value="<%=id%>">
+
+
 
 
                         <input type="text" class="input" name="first_name" required placeholder="Your First Name">
