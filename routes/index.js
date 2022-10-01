@@ -405,6 +405,19 @@ router.get('/contact-us', function(req, res, next) {
 router.post('/thankyou', function(req, res, next) {
 
   let body = req.body;
+  
+var today = new Date();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+
+
+  body['date'] = today;
+  body['time'] = time;
   console.log(req.body)
   pool.query(`insert into booking set ?`,body,(err,result)=>{
     if(err) throw err;

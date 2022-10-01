@@ -332,17 +332,18 @@ router.post('/user/:name/update-image',upload.fields([{ name: 'image', maxCount:
 
 
 
-router.get('/vendor/list/:type',(req,res)=>{
-    pool.query(`select v.* , 
-    (select c.name from category c where c.id = v.categoryid) as categoryname,
-    (select c.name from state c where c.id = v.state) as statename,
-    (select c.name from city c where c.id = v.city) as cityname,
-    (select c.name from agent c where c.userid = v.agentid) as agentname
-
-
-
-     from vendor v where v.status = '${req.params.type}' order by id desc`,(err,result)=>{
+router.get('/booking/list',(req,res)=>{
+    pool.query(`select v.*
+    from booking v order by id desc`,(err,result)=>{
         err ? console.log(err) : res.render('Admin/vendor-list',{result})
+    })
+})
+
+
+router.get('/subscriber/list',(req,res)=>{
+    pool.query(`select v.* 
+    from subscribe v order by id desc`,(err,result)=>{
+        err ? console.log(err) : res.render('Admin/subscriber-list',{result})
     })
 })
 
