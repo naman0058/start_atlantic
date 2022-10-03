@@ -315,132 +315,54 @@
 
                                 </div>
                             </div>
+
+
+<% if(result[7][0].average_rating) { %>
+
                             <div class="comments-block js-section" id="reviews">
                                 <div class="title_wrap">
-                                    <div class="val">5.0</div>
+                                    <div class="val"><%=result[7][0].average_rating%></div>
                                     <h2 class="title">Reviews</h2>
-                                    <div class="counter">12</div>
+                                    <div class="counter"><%=result[8].length%></div>
                                 </div>
+
+
+                                <% for(i=0;i<result[8].length;i++){ %>
                                 <div class="comments">
                                     <div class="comment_item">
                                         <div class="comment_item_top">
                                             <p>
-                                                But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.
+                                                <%=result[8][i].review%>
                                             </p>
                                         </div>
                                         <div class="comment_item_bottom">
                                             <div class="rating">
                                                 <div class="rating-stars">
-                                                    <div class="star filled"></div>
-                                                    <div class="star filled"></div>
-                                                    <div class="star filled"></div>
-                                                    <div class="star"></div>
-                                                    <div class="star"></div>
-                                                </div>
-                                                <button class="reply">Reply</button>
-                                            </div>
-                                            <div class="author">
-                                                <div class="userpic">
-                                                    <img src="img/demo-bg.jpg" alt="">
-                                                </div>
-                                                <div class="name">21.09.2019 by Maya Delia</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="comment_item answer_comment">
-                                        <div class="comment_item_top">
-                                            <p>
-                                                But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.
-                                            </p>
-                                        </div>
-                                        <div class="comment_item_bottom">
-                                            <button class="reply">Reply</button>
-                                            <div class="author">
-                                                <div class="name">21.09.2019 by Maya Delia</div>
-                                                <div class="userpic">
-                                                    <img src="img/demo-bg.jpg" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="comment_item">
-                                        <div class="comment_item_top">
-                                            <p>
-                                                But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.
-                                            </p>
-                                            <div class="images lightgallery">
-                                                <a href="img/demo-bg.jpg" class="img">
-                                                    <img src="img/demo-bg.jpg" alt="">
-                                                </a>
-                                                <a href="img/demo-bg.jpg" class="img">
-                                                    <img src="img/demo-bg.jpg" alt="">
-                                                </a>
-                                                <a href="img/demo-bg.jpg" class="img">
-                                                    <img src="img/demo-bg.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="comment_item_bottom">
-                                            <div class="rating">
-                                                <div class="rating-stars">
+                                                    <% for(i=0;i<result[8][i].rating;i++) { %>
+
                                                     <div class="star filled"></div>
-                                                    <div class="star filled"></div>
-                                                    <div class="star filled"></div>
-                                                    <div class="star"></div>
-                                                    <div class="star"></div>
+                                                    <% } %>
+                                                   
                                                 </div>
-                                                <button class="reply">Reply</button>
                                             </div>
                                             <div class="author">
-                                                <div class="userpic">
-                                                    <img src="img/demo-bg.jpg" alt="">
-                                                </div>
-                                                <div class="name">21.09.2019 by Maya Delia</div>
+                                               
+                                                <div class="name"><%=result[8][i].date%> by <%=result[8][i].name%></div>
                                             </div>
                                         </div>
                                     </div>
+                                  
+
+                                    
 
                                 </div>
-                                <div class="pagination">
-                                    <a class="arrow prev"></a>
-                                    <ul>
-                                        <li><a href="#" class="active">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                    </ul>
-                                    <a class="arrow next"></a>
-                                </div>
+
+                                <% } %>
+                               
                             </div>
-                            <form class="write_comment">
-                                <div class="top">
-                                    <h3 class="title">Write A Review</h3>
-                                    <div class="rating">
-                                        <div class="rating-text">Assigned Rating</div>
-                                        <div class="rating-stars stars user-rating">
-                                            <div class="star"></div>
-                                            <div class="star"></div>
-                                            <div class="star"></div>
-                                            <div class="star"></div>
-                                            <div class="star"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="center">
-                                    <input type="text" class="input" placeholder="Name">
-                                    <input type="text" class="input" placeholder="Email">
-                                    <textarea class="textarea" placeholder="Reviews"></textarea>
-                                </div>
-                                <div class="bottom">
-                                    <div class="files">
-                                        <label for="file-1" class="label"><span>Add a photo</span></label>
-                                        <input type="file" id="file-1">
-                                        <div class="file-name"><span>IMG_5050.JPG,</span> <span>IMG_5051.JPG</span></div>
-                                    </div>
-                                    <button class="submit button">Send</button>
-                                </div>
-                            </form>
+                            <% } %>
+                         
                         </div>
                         <div class="right_content sidebar">
                             <div class="navigation" id="sidebar-navigation">
@@ -450,7 +372,10 @@
                                     <li><a href="#included">Included</a></li>
                                     <li><a href="#location">Location</a></li>
                                     <li><a href="#stories">Stories</a></li>
+<% if(result[7][0].average_rating) { %>
+
                                     <li><a href="#reviews">Reviews</a></li>
+                                    <% } %>
                                 </ul>
                             </div>
                             <a class="book-now button js-popup-open" data-href="#book-now">

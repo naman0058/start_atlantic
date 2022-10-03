@@ -159,11 +159,15 @@ router.get('/tours/:name',(req,res)=>{
   var query4 = `select * from days where tourid = '${req.query.id}';`
   var query5 = `select * from story order by RAND() limit 4;`
   var query6 = `select * from instagram_stories order by id desc limit 5;`
+  var query7 = `select avg(rating) as average_rating from review where tourid = '${req.query.id}';`
+  var query8 = `select * from review where tourid = '${req.query.id}';`
 
 
-  pool.query(query+query1+query2+query3+query4+query5+query6 ,(err,result)=>{
+
+  pool.query(query+query1+query2+query3+query4+query5+query6+query7+query8 ,(err,result)=>{
     if(err) throw err;
     else res.render('tour_view',{result,name:req.params.name,id:req.query.id,inversion:'inversion'})
+    // else res.json(result)
   })
 })
 
