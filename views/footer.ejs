@@ -291,11 +291,14 @@
               But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain
           </div>
           <div class="form">
-              <input type="text" class="input" placeholder="Name">
-              <input type="email" class="input" placeholder="Email">
-              <input type="text" class="input" placeholder="Phone">
-              <textarea class="textarea" placeholder="Your Massage"></textarea>
-              <button class="submit button js-submit">Send Massage</button>
+            <form action="/contact/insert" method="post">
+              <input type="text" class="input" name="name" required placeholder="Name">
+              <input type="email" class="input" name="email" required placeholder="Email">
+              <input type="text" class="input" name="number" required placeholder="Phone">
+              <textarea class="textarea" name="message" required placeholder="Your Message"></textarea>
+              <button class="submit">Submit</button>
+            </form> 
+
           </div>
       </div>
   </div>

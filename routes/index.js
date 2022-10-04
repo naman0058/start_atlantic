@@ -223,7 +223,7 @@ router.get('/single-story',(req,res)=>{
 
 
 
-// Done
+// Don
 
 router.get('/blogs', function(req, res, next) {
   var query = `select id , name , logo from new_visa;`
@@ -241,14 +241,20 @@ router.get('/blogs', function(req, res, next) {
 
 
 router.get('/blogs-details', function(req, res, next) {
-  var query = `select id , name , logo from new_visa;`
-  var query1 = `select id , name , logo from country;`
-  var query2 = `select id , name from coaching;`
-  var query3 = `select * from blogs where id = '${req.query.id}';`
+  var query = `select * from country;`
+  var query1 = `select * from country;`
+  var query2 = `select * from country;`
+  var query3 = `select b.* , (select c.name from blog_category c where c.id = b.type) as categoryname from blogs b where b.id = '${req.query.id}';`
+  var query4 = `select * from instagram_stories order by id desc limit 5;`
+  var query5 = `select b.* , (select c.name from blog_category c where c.id = b.type) as categoryname from blogs b where b.id!= '${req.query.id}' order by id desc limit 3 ;`
+  var query6 = `select * from country order by RAND() limit 4;`
 
-  pool.query(query+query1+query2+query3,(err,result)=>{
+
+
+  pool.query(query+query1+query2+query3+query4+query5+query6,(err,result)=>{
     if(err) throw err;
-    else res.render('blogs_details',{result})
+    else res.render('blogs_details',{result,inversion:'inversion'})
+    // else res.json(result[3])
   })
 
 });
@@ -885,8 +891,6 @@ router.get('/migration/delete',(req,res)=>{
 router.post('/contact/insert',(req,res)=>{
 	let body = req.body
 	console.log(req.body)
-  
-
 var today = new Date();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
@@ -902,9 +906,14 @@ today = yyyy + '-' + mm + '-' + dd;
 
 	pool.query(`insert into contact set ?`,body,(err,result)=>{
 		if(err) throw err;
-		else res.json({
-			status:200
-		})
+		else {
+      var query = `select * from country;`
+      var query1 = `select * from country;`
+      pool.query(query+query1,(err,result)=>{
+        if(err) throw err;
+        else res.render('thankyou',{result,inversion:'inversion'})
+      })
+    }
 	})
 })
 
