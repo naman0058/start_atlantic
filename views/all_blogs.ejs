@@ -20,18 +20,15 @@
                         <div class="filters">
                             <div class="select_wrap">
                                 
-                                <select>
+                                <select id="blog_category_id" name="">
                                     <% for(i=0;i<result[2].length;i++){%>
-                                    <option value=" <%=result[2][i].id%>">
+                                    <option value="<%=result[2][i].id%>">
                                       <%=result[2][i].name%>
                                     </option>
                                    <% } %>
                                 </select>
                             </div>
-                            <div class="search_wrap">
-                                <input class="input" placeholder="Search" type="text">
-                                <button class="submit"></button>
-                            </div>
+                          
                         </div>
                     </div>
                     <div class="page_body">
@@ -39,7 +36,7 @@
                            
 
                             <% for(i=0;i<result[1].length;i++) { %>
-                                <a href="#" class="blog_item">
+                                <a href="/blog-details?id=<%=result[1][i].id%>" class="blog_item">
                                     <div class="blog_item_top" style="background-image: url(/images/<%=result[1][i].image%>);">
                                         <div class="sq_parent">
                                             <div class="sq_wrap">
@@ -79,3 +76,13 @@
 
 
 <%- include ('./footer.ejs') %>
+
+<script>
+
+$('#blog_category_id').change(function(){
+    let id = $('#blog_category_id').val()
+    window.location.href = `/blogs-category?id=${id}`
+    // alert(id)
+})
+
+</script>

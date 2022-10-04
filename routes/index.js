@@ -97,6 +97,19 @@ router.get('/all-blogs',(req,res)=>{
 
 
 
+router.get('/blogs-category',(req,res)=>{
+  var query = `select * from country;`
+  var query1 = `select b.* , (select c.name from blog_category c where c.id = b.type) as categoryname from blogs b where b.type = '${req.query.id}';`
+  var query2 = `select * from blog_category;`
+  pool.query(query+query1+query2,(err,result)=>{
+    if(err) throw err;
+    else res.render('all_blogs',{result,name:'All Blogs',inversion:'inversion'})
+  })
+})
+
+
+
+
 
 router.post('/instgram/insert',upload.array('image'),(req,res)=>{
 	let body = req.body

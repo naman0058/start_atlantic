@@ -5,20 +5,20 @@
                 <div class="wrap_float">
                     <a href="#">Home</a>
                     <span class="separator">/</span>
-                    <a href="#">Blog Single Right Sidebar</a>
+                    <a href="#"><%=result[3][0].name%></a>
                 </div>
             </div>
         </div>
-        <div class="page blog-list-page blog-single-page right-sidebar">
+        <div class="page blog-list-page blog-single-page">
             <div class="wrap">
                 <div class="wrap_float">
                     <div class="page_body">
-                        <div class="left_content">
+                        <!-- <div class="left_content"> -->
                             <div class="blog_single-head">
                                 <div class="blog_single-head_top" style="background-image: url(/images/<%=result[3][0].image%>)">
                                     <div class="tags">
-                                        <div class="tag red">Stream</div>
-                                        <div class="tag green">Countries</div>
+                                        
+                                        <div class="tag green"><%=result[3][0].categoryname%></div>
                                     </div>
                                     <h1 class="title"><%=result[3][0].name%></h1>
                                 </div>
@@ -27,7 +27,20 @@
                             <div class="blog_single-body">
                                 <p class="description">
                                   <%=result[3][0].project_description%>
+                                  
                                 </p>
+
+                                <div id="result"></div>
+
+
+<!-- 
+                                <div class="container">
+                                  <div class="row">
+                                    <div class="col-lg-12"> -->
+                        
+                                    <!-- </div>
+                                  </div>
+                                </div> -->
                               
                                 <div class="stories">
                                     <h2>Stories</h2>
@@ -57,127 +70,28 @@
                                     </div>
                                 </div>
                           
-                                <div id="result">ddd</div>
                               
+
+
+                               
+
                               
                             </div>
                             
                         </div>
-                        <div class="right_content sidebar">
-                            <div class="_block category_block">
-                                <h4 class="block_title">
-                                    Category
-                                </h4>
-                                <ul>
-                                    <li>
-                                        <a href="#" class="active">
-                                            <span>Show All</span>
-                                            <span class="count">56</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span>Countries</span>
-                                            <span class="count">56</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span>Stream</span>
-                                            <span class="count">56</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span>Video</span>
-                                            <span class="count">56</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span>Travel</span>
-                                            <span class="count">56</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="_block gallery_block">
-                                <h4 class="block_title">
-                                    Beautiful birds of Australia
-                                </h4>
-                                <div class="images">
-                                    <a href="gallery-single.html" class="img">
-                                        <img src="img/demo-bg.jpg" alt="">
-                                    </a>
-                                    <a href="gallery-single.html" class="img">
-                                        <img src="img/demo-bg.jpg" alt="">
-                                    </a>
-                                    <a href="gallery-single.html" class="img">
-                                        <img src="img/demo-bg.jpg" alt="">
-                                    </a>
-                                    <a href="gallery-single.html" class="img">
-                                        <img src="img/demo-bg.jpg" alt="">
-                                    </a>
-                                </div>
-                                <a class="link" href="gallery.html">View All Photo</a>
-                            </div>
-
-                            <div class="_block">
-                                <h4 class="block_title">
-                                    Popular travel
-                                </h4>
-                                <div class="popular">
-                                    <a href="tour-page-right-sidebar.html" class="item">
-                                        <div class="item_top">
-                                            <div class="img" style="background-image: url(img/demo-bg.jpg)"></div>
-                                            <h5 class="_title">
-                                                A trip to the mighty desert
-                                            </h5>
-                                        </div>
-                                        <div class="item_bottom">
-                                            <div class="days">5 days |</div>
-                                            <div class="cost">from $356</div>
-                                        </div>
-                                    </a>
-
-                                    <a href="tour-page-right-sidebar.html" class="item">
-                                        <div class="item_top">
-                                            <div class="img" style="background-image: url(img/demo-bg.jpg)"></div>
-                                            <h5 class="_title">
-                                                Antelope canyon in Arizona USA exclusive tour
-                                            </h5>
-                                        </div>
-                                        <div class="item_bottom">
-                                            <div class="days">5 days |</div>
-                                            <div class="cost">from $356</div>
-                                        </div>
-                                    </a>
-
-                                    <a href="tour-page-right-sidebar.html" class="item">
-                                        <div class="item_top">
-                                            <div class="img" style="background-image: url(img/demo-bg.jpg)"></div>
-                                            <h5 class="_title">
-                                                Asia
-                                            </h5>
-                                        </div>
-                                        <div class="item_bottom">
-                                            <div class="days">5 days |</div>
-                                            <span class="sale">-23%</span>
-                                            <div class="cost">from $356</div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                  
                     </div>
                 </div>
             </div>
         </div>
+
+      
+        
         <div class="blog">
             <div class="wrap">
                 <div class="wrap_float">
                     <div class="title_wrap">
+                      
                         <h2 class="title">Recent Blog Posts</h2>
                         <p class="subtitle">
                             Watch and be inspired
@@ -276,7 +190,7 @@
             
           })
 
-          
+
 let blogid = $('#blogid').val()
 // alert(blogid)
 
