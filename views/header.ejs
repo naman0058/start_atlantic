@@ -17,14 +17,20 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/star_atlantic/img/logo.png">
     <meta name="msapplication-TileColor" content="#151515">
     <meta name="theme-color" content="#151515">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.checked {
+  color: #D03000;
+}
+</style>
 </head>
 
 <body>
     <div class="container">
         <div class="top_panel <%=inversion%>">
             <div class="wrap">
-                
-                    
+                <div class="wrap_float">
+                   
                     <div class="left">
                         <div class="search_btn"></div>
                         <a href="/" class="logo">
@@ -83,22 +89,41 @@
                             </div>
                             <div class="right">
                                 <div class="tel"><a href="tel:+19092020119"><span>+ 1909 202 0119</span></a></div>
+                                <% if(login == true || login == 'true'){ %>
+
                                 <!-- <a class="favorites-count" title="Favourites" href="favourites.html">
                                     <div class="_counter">14</div>
                                     <div class="_text">Favourites</div>
                                 </a> -->
+                                <% } %>
                             </div>
-                            <!-- <div class="user" id="userblock">
+                            <div class="user" id="userblock">
                                 <div class="userlink" id="userlink"></div>
                                 <div class="usermenu" id="usermenu">
                                     <ul>
+                                        <% if(login == true || login == 'true'){ %>
+                                            <li><a href="#" class="js-popup-open">Welcome <%=name%></a></li>
+                                        
+                                            <li><a href="/my-enquiry" class="">My Enquiry</a></li>
+                                            <li><a href="/my-wishlist" class="">My Favourite</a></li>
+
+                                        <li><a href="/logout" class="">Logout</a></li>
+
+                                            <% } else { %>
+
+                                                <li><a href="#" class="js-popup-open" data-href="#registration">Registration</a></li>
                                         <li><a href="#" class="js-popup-open" data-href="#login">Login</a></li>
+
+
+                                                <% } %>
+
+                                        <!-- <li><a href="#" class="js-popup-open" data-href="#login">Login</a></li>
                                         <li><a href="#" class="js-popup-open" data-href="#registration">Registration</a></li>
                                         <li><a href="#" class="js-popup-open" data-href="#recovery-pass">Forgot password?</a></li>
-                                        <li><a href="#" class="js-popup-open" data-href="#profile-setting">Setting</a></li>
+                                        <li><a href="#" class="js-popup-open" data-href="#profile-setting">Setting</a></li> -->
                                     </ul>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                     <div class="mobile_btn" id="mobile_btn">
@@ -108,4 +133,5 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>

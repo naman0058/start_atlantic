@@ -1,0 +1,101 @@
+<%- include ('./header.ejs') %>
+
+
+        <div class="breadcrumbs">
+            <div class="wrap">
+                <div class="wrap_float">
+                    <a href="#">Home</a>
+                    <span class="separator">/</span>
+                    <a href="#">Travel List Full With</a>
+                </div>
+            </div>
+        </div>
+        <div class="page travel-list full-width favourites-list">
+            <div class="page_head">
+                <div class="wrap_float">
+                    <div class="wrap">
+                        <div class="wrap_float">
+                            <h1 class="title">
+                                My Wishlist 
+                            </h1>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page_body">
+                <div class="wrap">
+                    <div class="wrap_float">
+                        <div class="posts">
+                           
+                           
+                           <% for(i=0;i<result[2].length;i++){%>
+                           
+                            <a href="/tours/<%=result[2][i].tour_name.replace(/[ ,]+/g, "-")%>?id=<%=result[2][i].tourid%>" class="tour_item" style="background-image: url(/images/<%=result[2][i].tourimage%>">
+                                <div class="tour_item_top">
+                                    <p class="country">
+                                        <span><%=result[2][i].state_name%></span>
+                                    </p>
+                                    <div class="add_bookmark fav-button added" tourid="<%=result[2][i].tourid%>">
+
+
+                                       
+                                            <i class="is-added bouncy"></i>
+
+                                                <i class="not-added bouncy" ></i>
+
+                                                
+
+                                        <span class="fav-overlay"></span>
+                                    </div>
+                                </div>
+                                <div class="tour_item_bottom">
+                                    <h3 class="_title"><%=result[2][i].tour_name%></h3>
+                                    <div class="_info">
+                                        <div class="_info_left">
+                                            <div class="days">5 days </div>
+                                          
+
+                                        </div>
+                                        <div class="_info_right">
+                                            
+                                           
+                                            <p class="rating-text"> <%=result[2][i].average_rating.toFixed(1)%> <span class="fa fa-star checked"></span> &nbsp; </p>
+
+                                            <p class="rating-text"> <%=result[2][i].review%> reviews</p>
+                                        </div>
+                                     
+                                    </div>
+                                </div>
+                                <div class="shadow js-shadow"></div>
+                            </a>
+<% } %>
+                            
+                            
+
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="instagram_posts">
+            <div class="posts">
+             
+             
+             <% for(i=0;i<result[3].length;i++){%>
+              <a class="post">
+                    <div class="sq_parent">
+                        <div class="sq_wrap">
+                            <div class="sq_content">
+                                <img src="/images/<%=result[3][i].image%>" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <% } %>
+            
+            </div>
+        </div>
+        <%- include ('./footer.ejs') %>

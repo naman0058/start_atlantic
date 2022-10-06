@@ -1,0 +1,143 @@
+<%- include ('./header.ejs') %>
+
+
+        <div class="breadcrumbs">
+            <div class="wrap">
+                <div class="wrap_float">
+                    <a href="#">Home</a>
+                    <span class="separator">/</span>
+                    <a href="#">Travel List Full With</a>
+                </div>
+            </div>
+        </div>
+        <div class="page travel-list full-width favourites-list">
+            <div class="page_head">
+                <div class="wrap_float">
+                    <div class="wrap">
+                        <div class="wrap_float">
+                            <h1 class="title">
+                                My Enquiry 
+                            </h1>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page_body">
+                <div class="wrap">
+                    <div class="wrap_float">
+                        <div class="posts">
+                           
+                           
+                           <% for(i=0;i<result[2].length;i++){%>
+                           
+                            <a href="/tours/<%=result[2][i].tour_name.replace(/[ ,]+/g, "-")%>?id=<%=result[2][i].tour_id%>" class="tour_item" style="background-image: url(/images/<%=result[2][i].tourimage%>">
+                                <div class="tour_item_top">
+                                    <p class="country">
+                                        <span><%=result[2][i].state_name%></span>
+                                    </p>
+
+                                    <% if(login == true || login == 'true'){ %>
+
+
+                                    <% if(result[2][i].iswishlist) { %>
+                                        <div class="add_bookmark fav-button added" tourid="<%=result[2][i].tour_id%>">
+
+                                        <% } else { %>
+                                            <div class="add_bookmark fav-button" tourid="<%=result[2][i].tour_id%>">
+
+                                            <% } %>
+
+                                        <i class="is-added bouncy"></i>
+                                        <i class="not-added bouncy" ></i>
+                                        <span class="fav-overlay"></span>
+                                    </div>
+                                    <% } %>
+                                </div>
+                                <div class="tour_item_bottom">
+                                    <h3 class="_title"><%=result[2][i].tour_name%></h3>
+                                    <div class="_info">
+                                        <div class="_info_left">
+                                            <div class="days">5 days |</div>
+                                            <div class="cost"><%=result[2][i].finaladult1%> Adult | </div>
+                                            <div class="cost">&nbsp; <%=result[2][i].finalchildren1%> Children </div>
+                                            <br/><br/>
+                                         
+                                         
+                                            <% if(result[2][i].israting) { %>
+                                                <button style=" background-color: #D03000;
+                                                border: none;
+                                                color: white;
+                                                padding: 15px 32px;
+                                                text-align: center;
+                                                text-decoration: none;
+                                                display: inline-block;
+                                                font-size: 16px;
+                                                margin: 4px 2px;
+                                                border-radius: 8px;
+                                            
+                                                cursor: pointer;" type="button" class="btn btn-primary" tour_id="<%=result[2][i].tour_id%>">View Review</button>
+                       
+<% } else{ %>
+    <button style=" background-color: #D03000;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 8px;
+
+    cursor: pointer;" type="button" class="btn btn-primary add_review fav-button" tour_id="<%=result[2][i].tour_id%>">Add Review</button>
+    <% } %>
+                                        </div>
+                                        <div class="_info_right">
+                                            <div class="rating-text">Check-IN : <%=result[2][i].check_in_date%></div>
+                                            <br/>
+                                            <div class="rating-text">Check-Out : <%=result[2][i].check_out_date%></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shadow js-shadow"></div>
+                            </a>
+<% } %>
+                            
+                            
+
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="instagram_posts">
+            <div class="posts">
+             
+             
+             <% for(i=0;i<result[3].length;i++){%>
+              <a class="post">
+                    <div class="sq_parent">
+                        <div class="sq_wrap">
+                            <div class="sq_content">
+                                <img src="/images/<%=result[3][i].image%>" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <% } %>
+            
+            </div>
+        </div>
+        <%- include ('./footer.ejs') %>
+
+
+        <script>
+            $('.add_review').click(function(){
+                let tourid = $(this).attr('tour_id');
+                // alert(tourid)
+                window.location.href = '/rating?tourid='+tourid
+            })
+        </script>

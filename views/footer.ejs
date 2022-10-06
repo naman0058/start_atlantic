@@ -168,10 +168,9 @@
               Use the e-mail and password that you specified when registering on the site
           </div>
           <div class="form">
-              <input type="text" class="input" placeholder="Login">
-              <input type="text" class="input" placeholder="Password">
-              <button class="submit button">Sign In</button>
-              <a href="#" class="link">Forgot password?</a>
+              <input type="email" class="input" name="email" id="login_email" placeholder="Email ID">
+              <input type="password" class="input" name="password" id="login_password" placeholder="Password">
+              <button class="submit button signin">Sign In</button>
           </div>
       </div>
       <div class="popup-foot">
@@ -200,13 +199,13 @@
               Fill in the registration form and save your favorite tours, synchronize them on all devices
           </div>
           <div class="form">
-              <input type="text" class="input" placeholder="Username">
-              <input type="text" class="input" placeholder="Name">
-              <input type="text" class="input" placeholder="Surename">
-              <input type="email" class="input" placeholder="Email">
-              <input type="password" class="input" placeholder="Password">
-              <input type="password" class="input" placeholder="Password Repeat">
-              <button class="submit button js-submit">Registration</button>
+            <form method="post" action="/signup">
+              <input type="text" class="input" required name="name" placeholder="Name">
+              <input type="number" class="input" required name="number" placeholder="Mobile Number">
+              <input type="email" class="input" required name="email" placeholder="Email">
+              <input type="password" class="input" required name="password" placeholder="Password">
+              <button class="submit">Registration</button>
+            </form>
           </div>
       </div>
       <div class="popup-foot">
@@ -395,6 +394,46 @@
 
 
     $('.nextday').val(today)
+
+
+
+
+
+    $('.signin').click(function(){
+
+        if($('#login_email').val() == [] || $('#login_email').val() == '' || $('#login_email').val() == null || $('#login_email').val() == 'null' ) alert('Enter Email ID')
+        else if($('#login_password').val() == [] || $('#login_password').val() == '' || $('#login_password').val() == null || $('#login_password').val() == 'null' ) alert('Enter Passord')
+        else{
+            let email = $('#login_email').val()
+            let password = $('#login_password').val()
+            $.post('/login',{email,password},data=>{
+                // alert(data.msg)
+                if(data.msg=='invalid') alert('Invalid Login Credentials')
+                else {
+                    alert('Login Successfully')
+                    window.location.reload()
+                }
+            })
+
+        }
+
+    })
+
+
+    $('.add_bookmark').click(function(){
+        let tourid = $(this).attr('tourid')
+        alert(tourid)
+        $.post('/wishlist',{tourid},data=>{
+            // console.log(data)
+            if(data.msg =='failed') window.location.href = '/#registration'
+            else{
+                console.log('success')
+            }
+        })
+    })
+    
+
+
 </script>
 
 

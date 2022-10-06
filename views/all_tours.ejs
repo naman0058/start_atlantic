@@ -5,7 +5,7 @@
                 <div class="wrap_float">
                     <a href="#">Home</a>
                     <span class="separator">/</span>
-                    <a href="#"><%=name.replace('-' , ' ')%></a>
+                    <a href="#">All Tours</a>
                 </div>
             </div>
         </div>
@@ -15,7 +15,7 @@
                     <div class="wrap">
                         <div class="wrap_float">
                             <h1 class="title">
-                                Travel list Of <%=name.replace('-' , ' ')%>
+                                Travel list Of All Tours
                             </h1>
                             <!-- <p class="subtitle">
                                 Latin literature from 45 BC, making it over 2000 years old
@@ -29,7 +29,7 @@
                 
                 <div class="wrap">
                     <div class="wrap_float">
-                        <div class="search-form">
+                        <div class="search-">
                             <div class="destination-col">
                                 <div class="label">Destination</div>
                                 <div class="select_wrap">
@@ -102,12 +102,26 @@
                                     <p class="country">
                                         <span><%=result[1][i].statename%></span>
                                     </p>
-                                    <div class="add_bookmark fav-button">
+                                    
+                                    
+                                    <% if(login == true || login == 'true'){ %>
+
+                                    <% if(result[1][i].iswishlist) { %>
+                                        <div class="add_bookmark fav-button added" tourid="<%=result[1][i].id%>">
+
+                                        <% } else { %>
+                                            <div class="add_bookmark fav-button" tourid="<%=result[1][i].id%>">
+
+                                            <% } %>
+                                      
                                         <i class="is-added bouncy"></i>
                                         <i class="not-added bouncy"></i>
                                         <span class="fav-overlay"></span>
                                     </div>
+                                    <% } %>
                                 </div>
+
+
                                 <div class="tour_item_bottom">
                                     <h3 class="_title"><%=result[1][i].name%></h3>
                                     <div class="_info">
@@ -115,15 +129,12 @@
                                             <div class="days"><%=result[1][i].tour_days%> days </div>
                                             
                                         </div>
-                                        <div class="_info_right">
-                                            <div class="rating-stars">
-                                                <div class="star filled"></div>
-                                                <div class="star filled"></div>
-                                                <div class="star filled"></div>
-                                                <div class="star"></div>
-                                                <div class="star"></div>
-                                            </div>
-                                            <p class="rating-text">10 reviews</p>
+                                     <div class="_info_right">
+                                            
+                                           
+                                            <p class="rating-text"> <%=result[1][i].average_rating.toFixed(1)%> <span class="fa fa-star checked"></span> &nbsp; </p>
+
+                                            <p class="rating-text"> <%=result[1][i].review%> reviews</p>
                                         </div>
                                     </div>
                                 </div>
@@ -143,3 +154,5 @@
       
        
         <%- include ('./footer.ejs') %>
+
+        

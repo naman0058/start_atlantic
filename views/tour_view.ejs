@@ -18,6 +18,12 @@
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon.ico">
     <meta name="msapplication-TileColor" content="#151515">
     <meta name="theme-color" content="#151515">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    .checked {
+      color: #D03000;
+    }
+    </style>
 </head>
 
 <body>
@@ -29,7 +35,7 @@
                     <div class="left">
                         <div class="search_btn"></div>
                         <a href="/" class="logo">
-                            <img src="img/logo.svg" alt="">
+                            <img src="/star_atlantic/img/logo.png" alt="">
                         </a>
                     </div>
                     <div class="menu_wrap" id="menu_wrap">
@@ -89,17 +95,33 @@
                                     <div class="_text">Favourites</div>
                                 </a> -->
                             </div>
-                            <!-- <div class="user" id="userblock">
+                            <div class="user" id="userblock">
                                 <div class="userlink" id="userlink"></div>
                                 <div class="usermenu" id="usermenu">
                                     <ul>
+                                        <% if(login == true || login == 'true'){ %>
+                                            <li><a href="/my-enquiry" class="js-popup-open">Welcome <%=name%></a></li>
+                                        
+                                            <li><a href="/my-enquiry" class="">My Enquiry</a></li>
+                                            <li><a href="/my-wishlist" class="">My Favourite</a></li>
+
+                                        <li><a href="/logout" class="">Logout</a></li>
+
+                                            <% } else { %>
+
+                                                <li><a href="#" class="js-popup-open" data-href="#registration">Registration</a></li>
                                         <li><a href="#" class="js-popup-open" data-href="#login">Login</a></li>
+
+
+                                                <% } %>
+
+                                        <!-- <li><a href="#" class="js-popup-open" data-href="#login">Login</a></li>
                                         <li><a href="#" class="js-popup-open" data-href="#registration">Registration</a></li>
                                         <li><a href="#" class="js-popup-open" data-href="#recovery-pass">Forgot password?</a></li>
-                                        <li><a href="#" class="js-popup-open" data-href="#profile-setting">Setting</a></li>
+                                        <li><a href="#" class="js-popup-open" data-href="#profile-setting">Setting</a></li> -->
                                     </ul>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                     <div class="mobile_btn" id="mobile_btn">
@@ -119,7 +141,7 @@
                         <div class="wrap_float">
                             <a href="#">Home</a>
                             <span class="separator">/</span>
-                            <a href="#"><%=name.replace(/[ -]+/g, " ")%></a>
+                            <a href="#"><%=tourname.replace(/[ -]+/g, " ")%></a>
                         </div>
                     </div>
                 </div>
@@ -129,14 +151,25 @@
                             <div class="top-info">
                                 <p class="country"><%=result[1][0].statename%></p>
                                 <h1 class="tour_title">
-                                    <%=name.replace(/[ -]+/g, " ")%>
+                                    <%=tourname.replace(/[ -]+/g, " ")%>
                                 </h1>
                                 <div class="controls">
-                                    <div class="add_bookmark fav-button">
+                                    <% if(login == true || login == 'true'){ %>
+
+
+                                        <% if(result[1][0].iswishlist) { %>
+                                            <div class="add_bookmark fav-button added" tourid="<%=result[1][0].id%>">
+    
+                                            <% } else { %>
+                                                <div class="add_bookmark fav-button" tourid="<%=result[1][0].id%>">
+    
+                                                <% } %>
                                         <i class="is-added bouncy"></i>
                                         <i class="not-added bouncy"></i>
                                         <span class="fav-overlay"></span>
+                                       
                                     </div>
+                                    <% } %>
                                     <div class="arrows" id="tour-head-slider-arrows">
                                         <div class="arrow prev"></div>
                                         <div class="arrow next"></div>
@@ -214,14 +247,10 @@
                                     </div>
                                     <button class="btn button js-popup-open" data-href="#book-now">Enquiry now</button>
                                     <div class="rating">
-                                        <div class="rating-stars">
-                                            <div class="star filled"></div>
-                                            <div class="star filled"></div>
-                                            <div class="star filled"></div>
-                                            <div class="star"></div>
-                                            <div class="star"></div>
-                                        </div>
-                                        <div class="rating-text">10 reviews</div>
+                                      
+                                        <p class="rating-text"> <%=result[7][0].average_rating.toFixed(1)%> <span class="fa fa-star checked"></span> &nbsp; </p>
+                                        
+                                        <div class="rating-text"><%=result[8].length%> reviews</div>
                                     </div>
                                 </div>
                             </div>
@@ -321,7 +350,7 @@
 
                             <div class="comments-block js-section" id="reviews">
                                 <div class="title_wrap">
-                                    <div class="val"><%=result[7][0].average_rating%></div>
+                                    <div class="val"><%=result[7][0].average_rating.toFixed(1)%></div>
                                     <h2 class="title">Reviews</h2>
                                     <div class="counter"><%=result[8].length%></div>
                                 </div>
@@ -381,8 +410,17 @@
                             <a class="book-now button js-popup-open" data-href="#book-now">
                                 <span>Enquiry Now</span>
                             </a>
+
+                            <% if(login == true || login == 'true'){ %>
+
                             <div class="add-to-favorites">
-                                <div class="add_bookmark fav-button">
+                                <% if(result[1][0].iswishlist) { %>
+                                    <div class="add_bookmark fav-button added" tourid="<%=result[1][0].id%>">
+
+                                    <% } else { %>
+                                        <div class="add_bookmark fav-button" tourid="<%=result[1][0].id%>">
+
+                                        <% } %>
                                     <i class="is-added bouncy"></i>
                                     <i class="not-added bouncy"></i>
                                     <span class="fav-overlay"></span>
@@ -391,7 +429,7 @@
                                     Add to favourites
                                 </div>
                             </div>
-
+<% } %>
                         </div>
                     </div>
                 </div>
@@ -775,8 +813,8 @@
 
                         <input type="hidden" name="state_name" class="" value="<%=result[1][0].statename%>">
                         <input type="hidden" name="tour_name" class="" value="<%=result[1][0].name%>">
-                        <input type="text" name="country_id" class="" value="<%=result[1][0].countryid%>">
-                        <input type="text" name="tour_id" class="" value="<%=id%>">
+                        <input type="hidden" name="country_id" class="" value="<%=result[1][0].countryid%>">
+                        <input type="hidden" name="tour_id" class="" value="<%=id%>">
 
 
 
@@ -1102,6 +1140,20 @@ let newyear = year1;
 
 
 })
+
+
+
+$('.add_bookmark').click(function(){
+        let tourid = $(this).attr('tourid')
+        alert(tourid)
+        $.post('/wishlist',{tourid},data=>{
+            // console.log(data)
+            if(data.msg =='failed') window.location.href = '/#registration'
+            else{
+                console.log('success')
+            }
+        })
+    })
 
     </script>
     

@@ -65,11 +65,27 @@
                                     <p class="country">
                                         <span><%=result[2][i].statename%></span>
                                     </p>
-                                    <div class="add_bookmark fav-button">
+
+                                    <% if(login == true || login == 'true'){ %>
+
+
+                                    <% if(result[2][i].iswishlist) { %>
+                                        <div class="add_bookmark fav-button added" tourid="<%=result[2][i].id%>">
+
+                                        <% } else { %>
+                                            <div class="add_bookmark fav-button" tourid="<%=result[2][i].id%>">
+
+                                            <% } %>
+
+
+                                            
                                         <i class="is-added bouncy"></i>
                                         <i class="not-added bouncy"></i>
                                         <span class="fav-overlay"></span>
                                     </div>
+                                    <% } %>
+
+
                                 </div>
                                 <div class="tour_item_bottom">
                                     <h3 class="_title"><%=result[2][i].name%></h3>
@@ -77,15 +93,13 @@
                                         <div class="_info_left">
                                             <div class="days"><%=result[2][i].tour_days%> Days</div>
                                         </div>
+                                        
                                         <div class="_info_right">
-                                            <div class="rating-stars">
-                                                <div class="star filled"></div>
-                                                <div class="star filled"></div>
-                                                <div class="star filled"></div>
-                                                <div class="star"></div>
-                                                <div class="star"></div>
-                                            </div>
-                                            <p class="rating-text">10 reviews</p>
+                                            
+                                           
+                                            <p class="rating-text"> <%=result[2][i].average_rating.toFixed(1)%> <span class="fa fa-star checked"></span> &nbsp; </p>
+
+                                            <p class="rating-text"> <%=result[2][i].review%> reviews</p>
                                         </div>
                                     </div>
                                 </div>

@@ -6,15 +6,28 @@ var pool = require('./pool')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+
+
+
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
   var query1 = `select * from story;`
-  var query2 = `select t.* , (select s.name from state s where s.id = t.stateid) as statename from tour t;`
+  var query2 = `select t.* , 
+  (select s.name from state s where s.id = t.stateid) as statename,
+  (select w.id from wishlist w where w.tourid = t.id) as iswishlist,
+  (select count(id) from review r where r.tourid = t.id) as review,
+  (select avg(rating) from review r where r.tourid = t.id) as average_rating
+
+
+  from tour t;`
   var query3 = `select s.* , (select c.name from country c where c.id = s.countryid) as countryname from state s;`
   var query4 = `select b.* , (select c.name from blog_category c where c.id = b.type) as categoryname from blogs b limit 3;`
   var query5 = `select * from instagram_stories order by id desc limit 5;`
   pool.query(query+query1+query2+query3+query4+query5,(err,result)=>{
     if(err) throw err;
-    else res.render('index',{result,inversion:''})
+    else res.render('index',{result,inversion:'',login,name:req.session.username})
   })
 
 
@@ -26,17 +39,30 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/country/:name',(req,res)=>{
+
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
 
-  var query1 = `select t.* ,(select s.name from state s where s.id = t.stateid) as statename from tour t where t.countryid = '${req.query.id}' order by id desc;`
+  var query1 = `select t.* ,
+  (select s.name from state s where s.id = t.stateid) as statename,
+  (select w.id from wishlist w where w.tourid = t.id) as iswishlist,
+  (select count(id) from review r where r.tourid = t.id) as review,
+  (select avg(rating) from review r where r.tourid = t.id) as average_rating
+
+   from tour t where t.countryid = '${req.query.id}' order by id desc;`
   pool.query(query+query1,(err,result)=>{
     if(err) throw err;
-    else res.render('state',{result,name:req.params.name,id:req.query.id,inversion:'inversion'})
+    else res.render('state',{result,countryname:req.params.name,id:req.query.id,inversion:'inversion',login,name:req.session.username})
   })
 })
 
 
 router.get('/country',(req,res)=>{
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
 
   var query1 = `select t.* ,
@@ -48,7 +74,7 @@ router.get('/country',(req,res)=>{
   pool.query(query+query1,(err,result)=>{
     if(err) throw err;
     else if(result[1][0]){
-      res.render('state',{result,name:result[1][0].countryname,id:req.query.id,inversion:'inversion'})
+      res.render('state',{result,name:result[1][0].countryname,id:req.query.id,inversion:'inversion',login,name:req.session.username})
     } 
     else{
       res.render('nodat')
@@ -59,12 +85,15 @@ router.get('/country',(req,res)=>{
 
 
 router.get('/state/:name',(req,res)=>{
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
 
   var query1 = `select t.* ,(select s.name from state s where s.id = t.stateid) as statename from tour t where t.stateid = '${req.query.id}' order by id desc;`
   pool.query(query+query1,(err,result)=>{
     if(err) throw err;
-    else res.render('state',{result,name:req.params.name,id:req.query.id,inversion:'inversion'})
+    else res.render('state',{result,name:req.params.name,id:req.query.id,inversion:'inversion',login,name:req.session.username})
   })
 })
 
@@ -72,25 +101,37 @@ router.get('/state/:name',(req,res)=>{
 
 
 router.get('/all-tours',(req,res)=>{
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
 
-  var query1 = `select t.* ,(select s.name from state s where s.id = t.stateid) as statename from tour t  order by id desc;`
+  var query1 = `select t.* ,
+  (select s.name from state s where s.id = t.stateid) as statename,
+  (select w.id from wishlist w where w.tourid = t.id) as iswishlist,
+  (select count(id) from review r where r.tourid = t.id) as review,
+  (select avg(rating) from review r where r.tourid = t.id) as average_rating
+
+  from tour t  order by id desc;`
   pool.query(query+query1,(err,result)=>{
     if(err) throw err;
-    else res.render('all_tours',{result,name:'All Tours',inversion:'inversion'})
+    else res.render('all_tours',{result,inversion:'inversion',login,name:req.session.username})
   })
 })
 
 
 
 router.get('/all-blogs',(req,res)=>{
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
 
   var query1 = `select b.* , (select c.name from blog_category c where c.id = b.type) as categoryname from blogs b;`
   var query2 = `select * from blog_category;`
   pool.query(query+query1+query2,(err,result)=>{
     if(err) throw err;
-    else res.render('all_blogs',{result,name:'All Blogs',inversion:'inversion'})
+    else res.render('all_blogs',{result,name:'All Blogs',inversion:'inversion',login,name:req.session.username})
   })
 })
 
@@ -98,12 +139,15 @@ router.get('/all-blogs',(req,res)=>{
 
 
 router.get('/blogs-category',(req,res)=>{
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
   var query1 = `select b.* , (select c.name from blog_category c where c.id = b.type) as categoryname from blogs b where b.type = '${req.query.id}';`
   var query2 = `select * from blog_category;`
   pool.query(query+query1+query2,(err,result)=>{
     if(err) throw err;
-    else res.render('all_blogs',{result,name:'All Blogs',inversion:'inversion'})
+    else res.render('all_blogs',{result,name:'All Blogs',inversion:'inversion',login,name:req.session.username})
   })
 })
 
@@ -165,21 +209,27 @@ res.json({msg:'success'})
 
 
 router.get('/tours/:name',(req,res)=>{
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
-  var query1 = `select t.* ,(select s.name from state s where s.id = t.stateid) as statename from tour t where t.id = '${req.query.id}' order by id desc;`
+  var query1 = `select t.* ,
+  (select s.name from state s where s.id = t.stateid) as statename,
+  (select w.id from wishlist w where w.tourid = t.id) as iswishlist
+   from tour t where t.id = '${req.query.id}' order by id desc;`
   var query2 = `select * from includes where tourid = '${req.query.id}';`
   var query3 = `select * from images where tourid = '${req.query.id}';`
   var query4 = `select * from days where tourid = '${req.query.id}';`
   var query5 = `select * from story order by RAND() limit 4;`
   var query6 = `select * from instagram_stories order by id desc limit 5;`
   var query7 = `select avg(rating) as average_rating from review where tourid = '${req.query.id}';`
-  var query8 = `select * from review where tourid = '${req.query.id}';`
+  var query8 = `select * from review where tourid = '${req.query.id}' order by id desc;`
 
 
 
   pool.query(query+query1+query2+query3+query4+query5+query6+query7+query8 ,(err,result)=>{
     if(err) throw err;
-    else res.render('tour_view',{result,name:req.params.name,id:req.query.id,inversion:'inversion'})
+    else res.render('tour_view',{result,name:req.params.name,id:req.query.id,inversion:'inversion',login,tourname:req.params.name,name:req.session.username})
     // else res.json(result)
   })
 })
@@ -187,41 +237,125 @@ router.get('/tours/:name',(req,res)=>{
 
 
 router.get('/stories',(req,res)=>{
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
   var query1 = `select * from country;`
   pool.query(query+query1,(err,result)=>{
     if(err) throw err;
-    else res.render('stories',{result,inversion:'inversion'})
+    else res.render('stories',{result,inversion:'inversion',login,name:req.session.username})
   })
 })
 
 
 router.get('/countries',(req,res)=>{
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
   var query1 = `select * from country;`
   pool.query(query+query1,(err,result)=>{
     if(err) throw err;
-    else res.render('countries',{result,inversion:'inversion'})
+    else res.render('countries',{result,inversion:'inversion',login,name:req.session.username})
   })
 })
 
 
 
 router.get('/single-story',(req,res)=>{
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
   var query1 = `select * from story where countryid = '${req.query.id}';`
   pool.query(query+query1,(err,result)=>{
     if(err) throw err;
-    else res.render('single_stories',{result,inversion:''})
+    else res.render('single_stories',{result,inversion:'',login,name:req.session.username})
   })
 })
 
 
 
 
+router.post('/signup',(req,res)=>{
+  let body = req.body;
+  var today = new Date();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+
+
+  body['date'] = today;
+
+  console.log('body',req.body)
+
+  pool.query(`select * from user where number = '${req.body.number}' or email = '${req.body.email}'`,(err,result)=>{
+    if(err) throw err;
+    else if(result[0]){
+      req.session.usernumber ? login =  true : login = false
+
+
+  var query = `select * from country;`
+      var query1 = `select * from country;`
+      pool.query(query+query1,(err,result)=>{
+        if(err) throw err;
+        else res.render('failed',{result,inversion:'inversion',login,name:req.session.username})
+      
+      })
+    }
+    else{
+      pool.query(`insert into user set ?`,body,(err,result)=>{
+        if(err) throw err;
+        else{
+          let id = result.id;
+          req.session.usernumber ? login =  true : login = false
+
+
+  var query = `select * from country;`
+          var query1 = `select * from country;`
+          pool.query(query+query1,(err,result)=>{
+            if(err) throw err;
+            else {
+              req.session.userid = id;
+              req.session.username = req.body.name;
+              req.session.usernumber = req.body.number;
+              req.session.useremail = req.body.email;
+
+              res.render('success',{result,inversion:'inversion',login,name:req.session.username})
+            }
+          })
+        }
+      })
+    }
+  })
+})
+
+
+//jamshedpur , dhanbad , bhuvneshwar
 
 
 
+
+router.post('/login',(req,res)=>{
+  pool.query(`select * from user where email = '${req.body.email}' and password = '${req.body.password}'`,(err,result)=>{
+    if(err) throw err;
+    else if(result[0]){
+      req.session.userid = result[0].id;
+      req.session.username = result[0].name;
+      req.session.usernumber = result[0].number;
+      req.session.useremail = result[0].email;
+      res.json({msg:'success'})
+    }
+    else{
+      res.json({msg:'invalid'})
+    }
+  })
+})
 
 
 
@@ -239,6 +373,9 @@ router.get('/single-story',(req,res)=>{
 // Don
 
 router.get('/blogs', function(req, res, next) {
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select id , name , logo from new_visa;`
   var query1 = `select id , name , logo from country;`
   var query2 = `select id , name from coaching;`
@@ -254,6 +391,9 @@ router.get('/blogs', function(req, res, next) {
 
 
 router.get('/blogs-details', function(req, res, next) {
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
   var query1 = `select * from country;`
   var query2 = `select * from country;`
@@ -266,7 +406,7 @@ router.get('/blogs-details', function(req, res, next) {
 
   pool.query(query+query1+query2+query3+query4+query5+query6,(err,result)=>{
     if(err) throw err;
-    else res.render('blogs_details',{result,inversion:'inversion'})
+    else res.render('blogs_details',{result,inversion:'inversion',login,name:req.session.username})
     // else res.json(result[3])
   })
 
@@ -285,6 +425,9 @@ router.post('/blog-details-by-id',(req,res)=>{
 
 
 router.get('/countries', function(req, res, next) {
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select id , name , logo from new_visa;`
   var query1 = `select id , name , logo , description1 from country;`
   var query2 = `select id , name from coaching;`
@@ -299,6 +442,9 @@ router.get('/countries', function(req, res, next) {
 
 
 router.get('/visa', function(req, res, next) {
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select id , name , logo , description from new_visa;`
   var query1 = `select id , name , logo from country;`
   var query2 = `select id , name from coaching;`
@@ -312,6 +458,9 @@ router.get('/visa', function(req, res, next) {
 // Done
 
 router.get('/courses', function(req, res, next) {
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select id , name , logo from new_visa;`
   var query1 = `select id , name , logo from country;`
   var query2 = `select id , name from coaching;`
@@ -325,6 +474,9 @@ router.get('/courses', function(req, res, next) {
 
 router.get('/coaching/:name', function(req, res, next) {
   let coachingname = req.params.name.replace('-', ' ')
+
+  req.session.usernumber ? login =  true : login = false
+
 
   var query = `select id , name , logo from new_visa;`
   var query1 = `select id , name , logo from country;`
@@ -342,6 +494,9 @@ router.get('/coaching/:name', function(req, res, next) {
 router.get('/university/:name', function(req, res, next) {
   let university = req.params.name.replace('-', ' ')
 
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select id , name , logo from new_visa;`
   var query1 = `select id , name , logo from country;`
   var query2 = `select id , name from coaching;`
@@ -357,6 +512,9 @@ router.get('/university/:name', function(req, res, next) {
 // Done
 
 router.get('/visa_details', function(req, res, next) {
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select id , name , logo from new_visa;`
   var query1 = `select id , name , logo from country;`
   var query2 = `select id , name from coaching;`
@@ -371,6 +529,9 @@ router.get('/visa_details', function(req, res, next) {
 
 
 router.get('/country_details', function(req, res, next) {
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select id , name , logo from new_visa;`
   var query1 = `select id , name , logo from country;`
   var query2 = `select id , name from coaching;`
@@ -385,12 +546,15 @@ router.get('/country_details', function(req, res, next) {
 
 
 router.get('/about-us', function(req, res, next) {
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
   var query5 = `select * from instagram_stories order by id desc limit 5;`
 
   pool.query(query+query5,(err,result)=>{
     if(err) throw err;
-    else res.render('aboutus',{result,inversion:'inversion'})
+    else res.render('aboutus',{result,inversion:'inversion',login,name:req.session.username})
   })
 
 });
@@ -400,12 +564,15 @@ router.get('/about-us', function(req, res, next) {
 
 
 router.get('/show-gallery', function(req, res, next) {
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
   var query5 = `select * from gallery order by id desc limit 5;`
 
   pool.query(query+query5,(err,result)=>{
     if(err) throw err;
-    else res.render('aboutus',{result,inversion:'inversion'})
+    else res.render('aboutus',{result,inversion:'inversion',login,name:req.session.username})
   })
 
 });
@@ -414,13 +581,16 @@ router.get('/show-gallery', function(req, res, next) {
 
 
 router.get('/contact-us', function(req, res, next) {
+  req.session.usernumber ? login =  true : login = false
+
+
   var query = `select * from country;`
   var query5 = `select * from instagram_stories order by id desc limit 5;`
 
 
   pool.query(query+query5,(err,result)=>{
     if(err) throw err;
-    else res.render('contactus',{result,inversion:'inversion'})
+    else res.render('contactus',{result,inversion:'inversion',login,name:req.session.username})
   })
 
 });
@@ -447,11 +617,14 @@ today = yyyy + '-' + mm + '-' + dd;
   pool.query(`insert into booking set ?`,body,(err,result)=>{
     if(err) throw err;
     else {
-      var query = `select * from country;`
+      req.session.usernumber ? login =  true : login = false
+
+
+  var query = `select * from country;`
       var query1 = `select * from country;`
       pool.query(query+query1,(err,result)=>{
         if(err) throw err;
-        else res.render('thankyou',{result,inversion:'inversion'})
+        else res.render('thankyou',{result,inversion:'inversion',login,name:req.session.username})
       })
     
     }
@@ -489,7 +662,7 @@ pool.query(`select * from admin where email = '${req.body.email}' and password =
 
 
 
-router.get('/logout',(req,res)=>{
+router.get('/admin/logout',(req,res)=>{
   req.session.propertyadmin = null;
   res.redirect('/admin/login')
 })
@@ -639,7 +812,10 @@ router.get('/enquiry',(req,res)=>{
   if(req.session.partner){
 
     
-        var query = `select count(id) as counter from enquiry where vendorid = '${req.session.partner}' and date = CURDATE();`
+        req.session.usernumber ? login =  true : login = false
+
+
+  var query = `select count(id) as counter from enquiry where vendorid = '${req.session.partner}' and date = CURDATE();`
         var query2 = `select count(id) as counter from enquiry where vendorid = '${req.session.partner}' and date = CURDATE();`
         pool.query(query+query2,(err,result)=>{
           if(err) throw err;
@@ -920,11 +1096,14 @@ today = yyyy + '-' + mm + '-' + dd;
 	pool.query(`insert into contact set ?`,body,(err,result)=>{
 		if(err) throw err;
 		else {
-      var query = `select * from country;`
+      req.session.usernumber ? login =  true : login = false
+
+
+  var query = `select * from country;`
       var query1 = `select * from country;`
       pool.query(query+query1,(err,result)=>{
         if(err) throw err;
-        else res.render('thankyou',{result,inversion:'inversion'})
+        else res.render('thankyou',{result,inversion:'inversion',login,name:req.session.username})
       })
     }
 	})
@@ -1000,5 +1179,143 @@ router.get('/subscribe/delete',(req,res)=>{
 })
 
 
+ router.get('/logout',(req,res)=>{
+  req.session.username = null;
+  req.session.userid = null;
+  req.session.usernumber=null;
+  req.session.useremail= null;
+  res.redirect('/')
+ })
+
+
+
+ router.get('/my-enquiry',(req,res)=>{
+  req.session.usernumber ? login =  true : login = false
+
+
+  var query = `select * from country;`
+  var query1 = `select * from country;`
+  var query2 = `select b.* , 
+  (select t.logo from tour t where t.id = b.tour_id) as tourimage,
+  (select w.id from wishlist w where w.tourid = b.tour_id) as iswishlist,
+  (select w.id from review w where w.tourid = b.tour_id limit 1) as israting
+
+  from booking b where b.email = '${req.session.useremail}' and b.number = '${req.session.usernumber}' order by id desc limit 20;`
+  var query3 = `select * from instagram_stories order by id desc limit 5;`
+  
+  pool.query(query+query1+query2+query3,(err,result)=>{
+    if(err) throw err;
+    else res.render('myenquiry',{result,inversion:'inversion',login,name:req.session.username})
+  })
+})
+
+
+
+router.post('/wishlist',(req,res)=>{
+  let body = req.body
+
+  if(req.session.usernumber){
+    pool.query(`select * from wishlist where tourid = '${req.body.tourid}' and usernumber = '${req.session.usernumber}'`,(err,result)=>{
+      if(err) throw err;
+      else if(result[0]){
+     pool.query(`delete from wishlist where tourid = '${req.body.tourid}' and usernumber = '${req.session.usernumber}'`,(err,result)=>{
+      if(err) throw err;
+      else res.json({msg:'success'})
+     })
+      }
+      else{
+        body['usernumber'] = req.session.usernumber
+        pool.query(`insert into wishlist set ?`,body,(err,result)=>{
+          if(err) throw err;
+          else res.json({msg:'success'})
+        })
+      }
+    })
+  }
+  else{
+ res.json({msg:'failed'})
+  }
+
+  
+})
+
+
+
+router.get('/my-wishlist',(req,res)=>{
+  req.session.usernumber ? login =  true : login = false
+
+  var query = `select * from country;`
+  var query1 = `select * from country;`
+  var query2 = `select b.* , 
+  (select t.logo from tour t where t.id = b.tourid) as tourimage,
+  (select t.name from tour t where t.id = b.tourid) as tour_name,
+  (select count(id) from review r where r.tourid = b.tourid) as review,
+  (select avg(rating) from review r where r.tourid = b.tourid) as average_rating,
+  (select s.name from state s where s.id = (select t.stateid from tour t where t.id = b.tourid)) as state_name
+  from wishlist b where  b.usernumber = '${req.session.usernumber}' order by id desc limit 20;`
+  var query3 = `select * from instagram_stories order by id desc limit 5;`
+  var query4 = `select count(id) as counter from wishlist where usernumber = '${req.session.usernumber}';`
+  
+  pool.query(query+query1+query2+query3+query4,(err,result)=>{
+    if(err) throw err;
+    else res.render('mywishlist',{result,inversion:'inversion',login,name:req.session.username})
+  })
+})
+
+
+
+
+router.get('/rating',(req,res)=>{
+  req.session.usernumber ? login =  true : login = false
+var query = `select * from country;`
+  var query1 = `select * from country;`
+  var query2 = `select b.* , 
+  (select t.logo from tour t where t.id = b.tour_id) as tourimage,
+  (select w.id from wishlist w where w.tourid = b.tour_id) as iswishlist
+  from booking b where b.email = '${req.session.useremail}' and b.number = '${req.session.usernumber}' order by id desc limit 20;`
+  var query3 = `select * from instagram_stories order by id desc limit 5;`
+  
+  pool.query(query+query1+query2+query3,(err,result)=>{
+    if(err) throw err;
+    else res.render('rating',{result,inversion:'inversion',login,name:req.session.username,tourid:req.query.tourid})
+  })
+})
+
+
+
+router.post('/rating-insert',(req,res)=>{
+	let body = req.body
+	console.log(req.body)
+  
+
+var today = new Date();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+
+
+  body['date'] = today;
+  body['userid'] = req.session.userid;
+  body['name'] = req.session.username;
+
+ 
+    pool.query(`insert into review set ?`,body,(err,result)=>{
+      if(err) throw err;
+      else{
+        var query = `select * from country;`
+        var query1 = `select * from country;`
+        pool.query(query+query1,(err,result)=>{
+          if(err) throw err;
+          else res.render('success_rating',{result,inversion:'inversion',login,name:req.session.username})
+        })
+      }
+    })
+
+	
+})
 
 module.exports = router;
