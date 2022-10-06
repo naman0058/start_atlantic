@@ -349,6 +349,16 @@ router.get('/subscriber/list',(req,res)=>{
 
 
 
+
+router.get('/users/list',(req,res)=>{
+    pool.query(`select v.* 
+    from user v order by id desc`,(err,result)=>{
+        err ? console.log(err) : res.render('Admin/user-list',{result})
+    })
+})
+
+
+
 router.get('/agent/full/details/:id',(req,res)=>{
     pool.query(`select v.* , (select c.name from category c where c.id = v.categoryid) as categoryname from vendor v where v.agentid = '${req.params.id}' order by id desc`,(err,result)=>{
         err ? console.log(err) : res.render('Admin/vendor-list',{result})
