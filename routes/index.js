@@ -90,10 +90,15 @@ router.get('/state/:name',(req,res)=>{
 
   var query = `select * from country;`
 
-  var query1 = `select t.* ,(select s.name from state s where s.id = t.stateid) as statename from tour t where t.stateid = '${req.query.id}' order by id desc;`
+  var query1 = `select t.* ,
+  (select s.name from state s where s.id = t.stateid) as statename,
+  (select w.id from wishlist w where w.tourid = t.id) as iswishlist,
+  (select count(id) from review r where r.tourid = t.id) as review,
+  (select avg(rating) from review r where r.tourid = t.id) as average_rating
+  from tour t where t.stateid = '${req.query.id}' order by id desc;`
   pool.query(query+query1,(err,result)=>{
     if(err) throw err;
-    else res.render('state',{result,name:req.params.name,id:req.query.id,inversion:'inversion',login,name:req.session.username})
+    else res.render('state',{result,countryname:req.params.name,id:req.query.id,inversion:'inversion',login,name:req.session.username})
   })
 })
 
